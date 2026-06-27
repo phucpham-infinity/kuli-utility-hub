@@ -6,5 +6,6 @@ import manifest from './src/manifest.js'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [react(), tailwindcss(), crx({ manifest })],
 })
