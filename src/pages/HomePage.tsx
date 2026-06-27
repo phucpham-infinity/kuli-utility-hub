@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { AppLayout } from '../components/AppLayout'
 
 type UtilityItem = {
   id: string
@@ -77,13 +76,17 @@ const utilities: UtilityItem[] = [
 
 export function HomePage() {
   return (
-    <AppLayout title="Utilities" showBack={false} showHome={false}>
-      <section className="grid grid-cols-3 gap-x-7 gap-y-7 px-5 py-6" aria-label="Utility apps">
+    <main className="min-h-[560px] w-[420px] bg-white px-5 py-5 text-black swiss-noise">
+      <header className="mb-6">
+        <h1 className="text-[13px] font-black uppercase tracking-[0.18em]">Utilities</h1>
+      </header>
+
+      <section className="grid grid-cols-3 gap-x-7 gap-y-7" aria-label="Utility apps">
         {utilities.map((utility) => (
           <UtilityCard utility={utility} key={utility.id} />
         ))}
       </section>
-    </AppLayout>
+    </main>
   )
 }
 

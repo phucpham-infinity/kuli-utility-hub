@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { MdArrowBack, MdHome, MdSettings } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 
 type AppLayoutProps = {
@@ -55,42 +56,36 @@ function AppChromeHeader({ title, showBack, showHome, showSettings, onSettingsCl
       {showBack ? (
         <button
           aria-label="Back"
-          className="grid size-11 place-items-center border-r-4 border-black text-xl font-black transition duration-150 ease-linear hover:bg-[#ff3000]"
+          className="grid size-11 place-items-center border-r-4 border-black transition duration-150 ease-linear hover:bg-[#ff3000]"
           type="button"
           onClick={() => navigate(-1)}
         >
-          ‹
+          <MdArrowBack aria-hidden="true" size={24} />
         </button>
-      ) : (
-        <span className="size-11 border-r-4 border-black" />
-      )}
+      ) : null}
 
       {showHome ? (
         <Link
           aria-label="Home"
-          className="grid size-11 place-items-center border-r-4 border-black text-[11px] font-black uppercase tracking-[-0.04em] transition duration-150 ease-linear hover:bg-[#ff3000]"
+          className="grid size-11 place-items-center border-r-4 border-black transition duration-150 ease-linear hover:bg-[#ff3000]"
           to="/"
         >
-          Hm
+          <MdHome aria-hidden="true" size={24} />
         </Link>
-      ) : (
-        <span className="size-11 border-r-4 border-black" />
-      )}
+      ) : null}
 
       <h1 className="truncate px-4 text-sm font-black uppercase tracking-[0.14em]">{title}</h1>
 
       {showSettings ? (
         <button
           aria-label="Settings"
-          className="grid size-11 place-items-center border-l-4 border-black text-lg font-black transition duration-150 ease-linear hover:bg-[#ff3000]"
+          className="grid size-11 place-items-center border-l-4 border-black transition duration-150 ease-linear hover:bg-[#ff3000]"
           type="button"
           onClick={onSettingsClick}
         >
-          ⚙
+          <MdSettings aria-hidden="true" size={24} />
         </button>
-      ) : (
-        <span className="size-11 border-l-4 border-black" />
-      )}
+      ) : null}
     </header>
   )
 }
