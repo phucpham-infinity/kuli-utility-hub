@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 type UtilityItem = {
   id: string
   name: string
-  description: string
   href: string
   logo: string
   status: 'Ready' | 'Soon'
@@ -12,24 +11,21 @@ type UtilityItem = {
 const utilities: UtilityItem[] = [
   {
     id: '01',
-    name: 'Page to Quiz',
-    description: 'Scan current page and generate multiple-choice questions.',
+    name: 'Page Quiz',
     href: '/quiz',
     logo: 'QZ',
     status: 'Ready',
   },
   {
     id: '02',
-    name: 'Summarizer',
-    description: 'Compress long pages into structured notes.',
+    name: 'Summary',
     href: '#',
     logo: 'SM',
     status: 'Soon',
   },
   {
     id: '03',
-    name: 'Media Extractor',
-    description: 'Collect page images, video, audio, and transcripts.',
+    name: 'Media',
     href: '#',
     logo: 'MX',
     status: 'Soon',
@@ -37,35 +33,56 @@ const utilities: UtilityItem[] = [
   {
     id: '04',
     name: 'Prompt Lab',
-    description: 'Shape reusable prompts from page context.',
     href: '#',
     logo: 'PL',
+    status: 'Soon',
+  },
+  {
+    id: '05',
+    name: 'Cleaner',
+    href: '#',
+    logo: 'CL',
+    status: 'Soon',
+  },
+  {
+    id: '06',
+    name: 'Export',
+    href: '#',
+    logo: 'EX',
+    status: 'Soon',
+  },
+  {
+    id: '07',
+    name: 'Reader',
+    href: '#',
+    logo: 'RD',
+    status: 'Soon',
+  },
+  {
+    id: '08',
+    name: 'Translate',
+    href: '#',
+    logo: 'TR',
+    status: 'Soon',
+  },
+  {
+    id: '09',
+    name: 'Capture',
+    href: '#',
+    logo: 'CP',
     status: 'Soon',
   },
 ]
 
 export function HomePage() {
   return (
-    <main className="min-h-[560px] w-[420px] bg-white text-black swiss-noise">
-      <header className="border-b-4 border-black p-6 swiss-grid-pattern">
-        <p className="mb-4 text-xs font-black uppercase tracking-[0.22em] text-[#ff3000]">Kuli Utility Hub</p>
-        <h1 className="max-w-[9ch] text-6xl font-black uppercase leading-[0.86] tracking-[-0.08em]">
-          Utility Index
-        </h1>
+    <main className="min-h-[560px] w-[420px] bg-white px-5 py-5 text-black swiss-noise">
+      <header className="mb-6 flex items-center justify-between">
+        <h1 className="text-[13px] font-black uppercase tracking-[0.18em]">Utilities</h1>
+        <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ff3000]">More &gt;</p>
       </header>
 
-      <section className="grid grid-cols-2 border-b-4 border-black" aria-label="Utility summary">
-        <div className="border-r-4 border-black p-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em]">Tools</p>
-          <p className="mt-3 text-5xl font-black leading-none tracking-[-0.08em]">04</p>
-        </div>
-        <div className="bg-[#f2f2f2] p-4 swiss-dots">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em]">Mode</p>
-          <p className="mt-4 text-sm font-bold uppercase leading-4">Grid / Direct / Precise</p>
-        </div>
-      </section>
-
-      <section className="grid grid-cols-2" aria-label="Utilities">
+      <section className="grid grid-cols-3 gap-x-7 gap-y-7" aria-label="Utility apps">
         {utilities.map((utility) => (
           <UtilityCard utility={utility} key={utility.id} />
         ))}
@@ -81,34 +98,30 @@ type UtilityCardProps = {
 function UtilityCard({ utility }: UtilityCardProps) {
   const isReady = utility.status === 'Ready'
   const content = (
-    <article className="group flex min-h-48 flex-col border-b-4 border-r-4 border-black bg-white p-4 transition duration-150 ease-linear hover:bg-[#ff3000] focus-visible:bg-[#ff3000]">
-      <div className="flex items-start justify-between gap-3">
-        <span className="grid size-14 place-items-center border-4 border-black bg-black text-lg font-black tracking-[-0.08em] text-white transition duration-150 ease-linear group-hover:bg-white group-hover:text-black group-focus-visible:bg-white group-focus-visible:text-black">
-          {utility.logo}
-        </span>
-        <span className="text-[10px] font-black uppercase tracking-[0.18em]">{utility.id}</span>
-      </div>
-
-      <div className="mt-auto pt-6">
-        <p className="mb-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#ff3000] transition duration-150 ease-linear group-hover:text-black group-focus-visible:text-black">
-          {utility.status}
-        </p>
-        <h2 className="text-2xl font-black uppercase leading-[0.95] tracking-[-0.06em]">{utility.name}</h2>
-        <p className="mt-3 text-xs font-medium leading-4">{utility.description}</p>
-      </div>
+    <article className="group grid justify-items-center gap-2 text-center">
+      <span className="relative grid size-[74px] place-items-center overflow-hidden rounded-[18px] border-2 border-black bg-white text-[22px] font-black uppercase leading-none tracking-[-0.08em] shadow-[4px_4px_0_#000] transition duration-150 ease-linear group-hover:-translate-y-0.5 group-hover:bg-[#ff3000] group-focus-visible:bg-[#ff3000]">
+        <span className="absolute inset-0 swiss-grid-pattern opacity-70" />
+        <span className="relative z-10">{utility.logo}</span>
+        {isReady ? (
+          <span className="absolute right-[-2px] top-[-2px] z-20 grid size-5 place-items-center rounded-full border-2 border-white bg-[#ff3000] text-[10px] font-black text-black">
+            1
+          </span>
+        ) : null}
+      </span>
+      <span className="max-w-[86px] text-[13px] font-semibold leading-[1.15] tracking-[-0.01em] text-black">{utility.name}</span>
     </article>
   )
 
   if (!isReady) {
     return (
-      <div aria-disabled="true" className="cursor-not-allowed opacity-75">
+      <div aria-disabled="true" className="cursor-not-allowed opacity-80">
         {content}
       </div>
     )
   }
 
   return (
-    <Link className="block outline-none focus-visible:ring-4 focus-visible:ring-[#ff3000] focus-visible:ring-offset-0" to={utility.href}>
+    <Link className="block rounded-[18px] outline-none focus-visible:ring-2 focus-visible:ring-[#ff3000] focus-visible:ring-offset-4" to={utility.href}>
       {content}
     </Link>
   )
