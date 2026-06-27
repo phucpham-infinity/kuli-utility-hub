@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { AppLayout } from '../components/AppLayout'
 
 type UtilityItem = {
   id: string
@@ -76,18 +77,13 @@ const utilities: UtilityItem[] = [
 
 export function HomePage() {
   return (
-    <main className="min-h-[560px] w-[420px] bg-white px-5 py-5 text-black swiss-noise">
-      <header className="mb-6 flex items-center justify-between">
-        <h1 className="text-[13px] font-black uppercase tracking-[0.18em]">Utilities</h1>
-        <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ff3000]">More &gt;</p>
-      </header>
-
-      <section className="grid grid-cols-3 gap-x-7 gap-y-7" aria-label="Utility apps">
+    <AppLayout title="Utilities" showBack={false} showHome={false}>
+      <section className="grid grid-cols-3 gap-x-7 gap-y-7 px-5 py-6" aria-label="Utility apps">
         {utilities.map((utility) => (
           <UtilityCard utility={utility} key={utility.id} />
         ))}
       </section>
-    </main>
+    </AppLayout>
   )
 }
 
@@ -102,11 +98,6 @@ function UtilityCard({ utility }: UtilityCardProps) {
       <span className="relative grid size-[74px] place-items-center overflow-hidden rounded-[18px] border-2 border-black bg-white text-[22px] font-black uppercase leading-none tracking-[-0.08em] shadow-[4px_4px_0_#000] transition duration-150 ease-linear group-hover:-translate-y-0.5 group-hover:bg-[#ff3000] group-focus-visible:bg-[#ff3000]">
         <span className="absolute inset-0 swiss-grid-pattern opacity-70" />
         <span className="relative z-10">{utility.logo}</span>
-        {isReady ? (
-          <span className="absolute right-[-2px] top-[-2px] z-20 grid size-5 place-items-center rounded-full border-2 border-white bg-[#ff3000] text-[10px] font-black text-black">
-            1
-          </span>
-        ) : null}
       </span>
       <span className="max-w-[86px] text-[13px] font-semibold leading-[1.15] tracking-[-0.01em] text-black">{utility.name}</span>
     </article>
