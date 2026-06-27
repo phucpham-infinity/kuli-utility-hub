@@ -1,10 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
+import { HomePage } from './pages/HomePage'
 import { QuizGeneratorPage } from './pages/QuizGeneratorPage'
 
 function App() {
   return (
     <Routes>
-      <Route path="*" element={<QuizGeneratorPage />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/quiz" element={<QuizGeneratorPage />} />
+      <Route path="*" element={<HomePage />} />
     </Routes>
   )
 }

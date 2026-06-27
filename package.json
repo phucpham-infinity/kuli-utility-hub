@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
-    "lint": "oxlint",
+    "lint": "oxlint && pnpm run design:lint",
+    "design:lint": "designmd lint DESIGN.md",
+    "design:export:tailwind": "designmd export DESIGN.md --format css-tailwind",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.7.0",
+    "@google/design.md": "^0.3.0",
     "@tailwindcss/vite": "^4.3.1",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
