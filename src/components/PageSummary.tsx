@@ -27,7 +27,7 @@ function SummaryItem({ label, value }: SummaryItemProps) {
   return (
     <div className="grid gap-0.5">
       <dt className="text-xs text-slate-500 dark:text-slate-400">{label}</dt>
-      <dd className="m-0 break-words text-sm text-slate-900 dark:text-slate-100">{value}</dd>
+      <dd className="m-0 wrap-break-word text-sm text-slate-900 dark:text-slate-100">{value}</dd>
     </div>
   )
 }
