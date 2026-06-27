@@ -6,33 +6,34 @@ import { useQuizGenerator } from '../hooks/useQuizGenerator'
 
 export function QuizGeneratorPage() {
   const {
-    apiKey,
     questionCount,
     snapshot,
     questions,
     error,
     isScanning,
     isGenerating,
-    setApiKey,
     setQuestionCount,
     scanPage,
     generateQuestions,
   } = useQuizGenerator()
 
   return (
-    <AppLayout
-      title="Page Quiz"
-      subtitle="Quet trang hien tai, chuyen HTML thanh Markdown, lay media va tao cau hoi trac nghiem."
-    >
-      <div className="flex flex-col gap-3.5 bg-slate-50 p-4 text-left text-slate-700 dark:bg-slate-950 dark:text-slate-300">
+    <AppLayout title="Page Quiz">
+      <div className="swiss-noise flex flex-col gap-4 bg-white p-4 text-left text-black">
+        <div className="border border-black bg-white p-4 text-black shadow-[6px_6px_0_#111]">
+          <p className="text-[11px] font-black uppercase tracking-[0.28em] text-black/45">Utility</p>
+          <h1 className="mt-2 text-4xl font-black uppercase leading-[0.85] tracking-[-0.08em]">Page Quiz</h1>
+          <p className="mt-3 max-w-[32rem] text-sm font-bold leading-6 text-black/65">
+            Scan the active page, collect markdown and media, then generate a compact quiz for fast review.
+          </p>
+        </div>
+
         <QuizControls
-          apiKey={apiKey}
           questionCount={questionCount}
           hasSnapshot={Boolean(snapshot)}
           error={error}
           isScanning={isScanning}
           isGenerating={isGenerating}
-          onApiKeyChange={setApiKey}
           onQuestionCountChange={setQuestionCount}
           onScanPage={scanPage}
           onGenerateQuestions={generateQuestions}

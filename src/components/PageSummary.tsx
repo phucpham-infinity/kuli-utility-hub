@@ -6,13 +6,16 @@ type PageSummaryProps = {
 
 export function PageSummary({ snapshot }: PageSummaryProps) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900" aria-label="Scanned page summary">
-      <h2 className="mb-3 text-lg font-semibold text-slate-950 dark:text-slate-50">Trang da quet</h2>
-      <dl className="grid gap-2.5">
-        <SummaryItem label="Tieu de" value={snapshot.title || 'Khong co tieu de'} />
+    <section className="border border-black bg-white p-4 text-black shadow-[6px_6px_0_#111]" aria-label="Scanned page summary">
+      <div className="mb-4 border-b border-black pb-3">
+        <p className="text-[11px] font-black uppercase tracking-[0.24em] text-black/50">Source</p>
+        <h2 className="mt-1 text-xl font-black uppercase leading-none tracking-[-0.04em]">Scanned page</h2>
+      </div>
+      <dl className="grid gap-3">
+        <SummaryItem label="Title" value={snapshot.title || 'Untitled'} />
         <SummaryItem label="URL" value={snapshot.url} />
-        <SummaryItem label="Markdown" value={`${snapshot.markdown.length.toLocaleString()} ky tu`} />
-        <SummaryItem label="Media" value={`${snapshot.media.length} muc`} />
+        <SummaryItem label="Markdown" value={`${snapshot.markdown.length.toLocaleString()} characters`} />
+        <SummaryItem label="Media" value={`${snapshot.media.length} items`} />
       </dl>
     </section>
   )
@@ -25,9 +28,9 @@ type SummaryItemProps = {
 
 function SummaryItem({ label, value }: SummaryItemProps) {
   return (
-    <div className="grid gap-0.5">
-      <dt className="text-xs text-slate-500 dark:text-slate-400">{label}</dt>
-      <dd className="m-0 wrap-break-word text-sm text-slate-900 dark:text-slate-100">{value}</dd>
+    <div className="grid gap-1 border-b border-black/15 pb-2 last:border-b-0 last:pb-0">
+      <dt className="text-[10px] font-black uppercase tracking-[0.18em] text-black/45">{label}</dt>
+      <dd className="m-0 wrap-break-word text-sm font-bold leading-5 text-black">{value}</dd>
     </div>
   )
 }

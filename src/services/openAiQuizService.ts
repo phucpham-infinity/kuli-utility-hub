@@ -5,6 +5,16 @@ const openAiClient = axios.create({
   baseURL: 'https://api.openai.com/v1',
 })
 
+const openAiApiKey = import.meta.env.VITE_OPENAI_API_KEY?.trim() ?? ''
+
+function getOpenAiApiKey(): string {
+  if (!openAiApiKey) {
+    throw new Error('Missing VITE_OPENAI_API_KEY.')
+  }
+
+  return openAiApiKey
+}
+
 function extractJsonObject(value: string): string {
   const firstBrace = value.indexOf('{')
   const lastBrace = value.lastIndexOf('}')
@@ -54,7 +64,7 @@ Media:
 ${mediaContext || 'No media found.'}`
 }
 
-async function transcribeMedia(openAiApiKey: string, media: PageMedia): Promise<PageMedia> {
+async function transcribeMedia(media: PageMedia): Promise<PageMedia> {
   if (media.kind === 'image') return media
 
   try {
@@ -65,7 +75,7 @@ async function transcribeMedia(openAiApiKey: string, media: PageMedia): Promise<
 
     const response = await openAiClient.post<{ text?: string }>('/audio/transcriptions', formData, {
       headers: {
-        Authorization: `Bearer ${openAiApiKey}`,
+        Authorization: `Bearer ${getOpenAiApiKey()}`,
       },
     })
 
@@ -75,16 +85,12 @@ async function transcribeMedia(openAiApiKey: string, media: PageMedia): Promise<
   }
 }
 
-export async function enrichMediaWithTranscripts(
-  openAiApiKey: string,
-  media: PageMedia[],
-): Promise<PageMedia[]> {
+export async function enrichMediaWithTranscripts(media: PageMedia[]): Promise<PageMedia[]> {
   const limitedMedia = media.slice(0, 12)
-  return Promise.all(limitedMedia.map((item) => transcribeMedia(openAiApiKey, item)))
+  return Promise.all(limitedMedia.map((item) => transcribeMedia(item)))
 }
 
 export async function requestQuiz(
-  openAiApiKey: string,
   snapshot: PageSnapshot,
   media: PageMedia[],
   questionCount: number,
@@ -108,7 +114,7 @@ export async function requestQuiz(
     },
     {
       headers: {
-        Authorization: `Bearer ${openAiApiKey}`,
+        Authorization: `Bearer ${getOpenAiApiKey()}`,
         'Content-Type': 'application/json',
       },
     },
