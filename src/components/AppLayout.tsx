@@ -81,7 +81,7 @@ function AppChromeHeader({ title, showBack, showHome, showSettings, onSettingsCl
           aria-label="Settings"
           className="grid size-11 place-items-center border-l-4 border-black transition duration-150 ease-linear hover:bg-[#ff3000]"
           type="button"
-          onClick={onSettingsClick}
+          onClick={onSettingsClick ?? (() => navigate('/settings'))}
         >
           <MdSettings aria-hidden="true" size={24} />
         </button>

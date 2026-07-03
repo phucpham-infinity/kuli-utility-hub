@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { MdSettings } from 'react-icons/md'
 
 type UtilityItem = {
   id: string
@@ -77,8 +78,15 @@ const utilities: UtilityItem[] = [
 export function HomePage() {
   return (
     <main className="min-h-[560px] w-[420px] bg-white px-5 py-5 text-black swiss-noise">
-      <header className="mb-6">
+      <header className="mb-6 flex items-center justify-between">
         <h1 className="text-[13px] font-black uppercase tracking-[0.18em]">Utilities</h1>
+        <Link
+          aria-label="Settings"
+          className="grid size-9 place-items-center border-2 border-black transition duration-150 ease-linear hover:bg-[#ff3000]"
+          to="/settings"
+        >
+          <MdSettings aria-hidden="true" size={20} />
+        </Link>
       </header>
 
       <section className="grid grid-cols-3 gap-x-7 gap-y-7" aria-label="Utility apps">

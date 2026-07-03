@@ -1,7 +1,6 @@
+import { getKuliBeBaseUrl } from '../lib/config'
 import type { PageSnapshot } from '../types'
 
-const kuliBeBaseUrl = (import.meta.env.VITE_KULI_BE_BASE_URL ?? 'http://127.0.0.1:8000').replace(/\/$/, '')
-const markdownApiUrl = `${kuliBeBaseUrl}/html-file-to-markdown`
 const noReceivingEndMessage = 'Receiving end does not exist'
 
 async function convertHtmlToMarkdown(snapshot: PageSnapshot): Promise<string> {
@@ -11,7 +10,7 @@ async function convertHtmlToMarkdown(snapshot: PageSnapshot): Promise<string> {
 
   formData.append('file', file)
 
-  const response = await fetch(markdownApiUrl, {
+  const response = await fetch(`${getKuliBeBaseUrl()}/html-file-to-markdown`, {
     method: 'POST',
     body: formData,
   })
