@@ -1,21 +1,17 @@
 type QuizControlsProps = {
-  questionCount: number
   hasSnapshot: boolean
   error?: string
   isScanning: boolean
   isGenerating: boolean
-  onQuestionCountChange: (questionCount: number) => void
   onScanPage: () => void
   onGenerateQuestions: () => void
 }
 
 export function QuizControls({
-  questionCount,
   hasSnapshot,
   error,
   isScanning,
   isGenerating,
-  onQuestionCountChange,
   onScanPage,
   onGenerateQuestions,
 }: QuizControlsProps) {
@@ -32,18 +28,6 @@ export function QuizControls({
       </div>
 
       <div className="grid gap-4">
-        <label className="grid max-w-40 gap-2 text-xs font-black uppercase tracking-[0.16em] text-black">
-          <span>Question count</span>
-          <input
-            className="h-11 w-full border border-black bg-white px-3 text-base font-black text-black outline-none transition focus:border-black focus:bg-white focus:text-black"
-            type="number"
-            min="1"
-            max="20"
-            value={questionCount}
-            onChange={(event) => onQuestionCountChange(Number(event.target.value))}
-          />
-        </label>
-
         <div className="grid grid-cols-2 gap-3">
           <button
             className="h-12 border border-black bg-white px-4 text-xs font-black uppercase tracking-[0.18em] text-black transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#111] disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0 disabled:hover:shadow-none"

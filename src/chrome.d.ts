@@ -30,4 +30,18 @@ declare namespace chrome {
     function query(queryInfo: { active?: boolean; currentWindow?: boolean }): Promise<Tab[]>
     function sendMessage<TResponse = unknown>(tabId: number, message: unknown): Promise<TResponse>
   }
+  namespace scripting {
+    type InjectionTarget = {
+      tabId: number
+    }
+
+    type InjectionResult<T = unknown> = {
+      result?: T
+    }
+
+    function executeScript<T = unknown>(injection: {
+      target: InjectionTarget
+      func: () => T
+    }): Promise<Array<InjectionResult<T>>>
+  }
 }

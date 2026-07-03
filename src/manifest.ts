@@ -10,7 +10,7 @@ export default defineManifest({
     default_popup: 'index.html',
   },
   permissions: ['activeTab', 'scripting', 'storage'],
-  host_permissions: ['<all_urls>', 'https://api.openai.com/*'],
+  host_permissions: ['<all_urls>', 'https://api.openai.com/*', 'https://kuli-be.vercel.app/*'],
   content_scripts: [
     {
       matches: ['<all_urls>'],

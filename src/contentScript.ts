@@ -4,8 +4,6 @@ type ScanPageMessage = {
   type: 'KULI_SCAN_PAGE'
 }
 
-const BLOCKED_SELECTORS = 'script, style, noscript, svg, canvas, iframe, link, meta'
-
 function absoluteUrl(value: string | null): string | undefined {
   if (!value) return undefined
 
@@ -14,54 +12,6 @@ function absoluteUrl(value: string | null): string | undefined {
   } catch {
     return undefined
   }
-}
-
-function cleanText(value: string): string {
-  return value.replace(/\s+/g, ' ').trim()
-}
-
-function elementToMarkdown(element: Element): string {
-  const tagName = element.tagName.toLowerCase()
-  const text = cleanText(element.textContent ?? '')
-
-  if (!text && tagName !== 'img') return ''
-
-  if (/^h[1-6]$/.test(tagName)) {
-    const level = Number(tagName.slice(1))
-    return `${'#'.repeat(level)} ${text}`
-  }
-
-  if (tagName === 'li') return `- ${text}`
-
-  if (tagName === 'img') {
-    const image = element as HTMLImageElement
-    const src = absoluteUrl(image.currentSrc || image.src)
-    if (!src) return ''
-    return `![${image.alt || 'image'}](${src})`
-  }
-
-  if (tagName === 'a') {
-    const anchor = element as HTMLAnchorElement
-    const href = absoluteUrl(anchor.href)
-    return href ? `[${text}](${href})` : text
-  }
-
-  return text
-}
-
-function htmlToMarkdown(root: Element): string {
-  const selectors = 'h1,h2,h3,h4,h5,h6,p,li,blockquote,pre,code,img,a'
-  const lines = Array.from(root.querySelectorAll(selectors))
-    .map(elementToMarkdown)
-    .filter(Boolean)
-
-  return Array.from(new Set(lines)).join('\n\n')
-}
-
-function cloneReadableBody(): HTMLElement {
-  const clone = document.body.cloneNode(true) as HTMLElement
-  clone.querySelectorAll(BLOCKED_SELECTORS).forEach((element) => element.remove())
-  return clone
 }
 
 function collectMedia(): PageMedia[] {
@@ -101,13 +51,13 @@ function collectMedia(): PageMedia[] {
 }
 
 function scanPage(): PageSnapshot {
-  const readableBody = cloneReadableBody()
+  const html = document.documentElement.outerHTML
 
   return {
     title: document.title,
     url: window.location.href,
-    html: readableBody.innerHTML,
-    markdown: htmlToMarkdown(readableBody),
+    html,
+    markdown: '',
     media: collectMedia(),
   }
 }

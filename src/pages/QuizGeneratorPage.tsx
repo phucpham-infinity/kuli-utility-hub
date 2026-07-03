@@ -5,17 +5,7 @@ import { QuizControls } from '../components/QuizControls'
 import { useQuizGenerator } from '../hooks/useQuizGenerator'
 
 export function QuizGeneratorPage() {
-  const {
-    questionCount,
-    snapshot,
-    questions,
-    error,
-    isScanning,
-    isGenerating,
-    setQuestionCount,
-    scanPage,
-    generateQuestions,
-  } = useQuizGenerator()
+  const { snapshot, questions, error, isScanning, isGenerating, scanPage, generateQuestions } = useQuizGenerator()
 
   return (
     <AppLayout title="Quiz">
@@ -29,12 +19,10 @@ export function QuizGeneratorPage() {
         </div>
 
         <QuizControls
-          questionCount={questionCount}
           hasSnapshot={Boolean(snapshot)}
           error={error}
           isScanning={isScanning}
           isGenerating={isGenerating}
-          onQuestionCountChange={setQuestionCount}
           onScanPage={scanPage}
           onGenerateQuestions={generateQuestions}
         />

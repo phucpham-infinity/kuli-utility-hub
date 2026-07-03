@@ -11,7 +11,6 @@ export function useQuizGenerator() {
   const snapshot = useQuizGeneratorStore((state) => state.snapshot)
   const questions = useQuizGeneratorStore((state) => state.questions)
   const error = useQuizGeneratorStore((state) => state.error)
-  const setQuestionCount = useQuizGeneratorStore((state) => state.setQuestionCount)
   const setSnapshot = useQuizGeneratorStore((state) => state.setSnapshot)
   const setQuestions = useQuizGeneratorStore((state) => state.setQuestions)
   const setError = useQuizGeneratorStore((state) => state.setError)
@@ -46,13 +45,11 @@ export function useQuizGenerator() {
   })
 
   return {
-    questionCount,
     snapshot,
     questions,
     error,
     isScanning: scanPageMutation.isPending,
     isGenerating: generateQuestionsMutation.isPending,
-    setQuestionCount,
     scanPage: scanPageMutation.mutate,
     generateQuestions: generateQuestionsMutation.mutate,
   }
