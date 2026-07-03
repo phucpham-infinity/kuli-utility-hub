@@ -1,3 +1,11 @@
+interface ImportMetaEnv {
+  readonly VITE_KULI_BE_BASE_URL?: string
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
+
 declare namespace chrome {
   namespace runtime {
     type MessageSender = {

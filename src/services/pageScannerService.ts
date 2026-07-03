@@ -1,6 +1,7 @@
 import type { PageSnapshot } from '../types'
 
-const markdownApiUrl = 'https://kuli-be.vercel.app/html-file-to-markdown'
+const kuliBeBaseUrl = (import.meta.env.VITE_KULI_BE_BASE_URL ?? 'http://127.0.0.1:8000').replace(/\/$/, '')
+const markdownApiUrl = `${kuliBeBaseUrl}/html-file-to-markdown`
 const noReceivingEndMessage = 'Receiving end does not exist'
 
 async function convertHtmlToMarkdown(snapshot: PageSnapshot): Promise<string> {
